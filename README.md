@@ -57,7 +57,7 @@
                 "Category": "Hats",
                 "Color":    "Dark Green",
                 "Size":     "One Size",
-                "Images":  ["google.com"]
+                "Images":  ["google.com", "youtube.com"]
             }
         ```
 - Setup Server environment variables (./server/.env)
@@ -96,10 +96,10 @@
 - Products api
     - Create a new product [x]
     - Get all products [x]
-    - Get product details
+    - Get product details [x]
     - Update a product [x]
     - Checkout a product
-    - Delete a product
+    - Delete a product [x]
 - Create Admin Page
 - Form to create a new product
 - Setup Filebase Storage to store images

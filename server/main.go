@@ -17,6 +17,7 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/api/products", controllers.GetProducts)
+	r.GET("/api/products/:id", controllers.GetProduct)
 	r.POST("/api/products", controllers.CreateProduct)
 	r.PATCH("/api/products/:id", controllers.UpdateProduct)
 	r.DELETE("/api/products/:id", controllers.DeleteProduct)

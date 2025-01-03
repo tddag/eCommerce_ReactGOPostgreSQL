@@ -42,6 +42,34 @@ func GetProducts(c *gin.Context) {
 	})
 }
 
+func GetProduct(c *gin.Context) {
+	id := c.Param("id")
+
+	var product models.Product
+	initializers.DB.First(&product, id)
+
+	var productClient = models.ProductClient{
+		ID:       product.ID,
+		Name:     product.Name,
+		Price:    product.Price,
+		Category: product.Category,
+		Color:    product.Color,
+		Size:     product.Size,
+	}
+	var images []models.Image
+	result := initializers.DB.Where(&models.Image{Product_id: product.ID}).Find(&images)
+	if result.Error != nil {
+		fmt.Printf("Failed to get images %v\n", result.Error)
+	}
+	for _, image := range images {
+		productClient.Images = append(productClient.Images, image.Image_url)
+	}
+
+	c.JSON(200, gin.H{
+		"product": productClient,
+	})
+}
+
 func CreateProduct(c *gin.Context) {
 	var body models.ProductClient
 
