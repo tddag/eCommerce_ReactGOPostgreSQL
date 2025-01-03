@@ -5,6 +5,7 @@ import (
 	"eCommerce-app/initializers"
 	"fmt"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,6 +16,7 @@ func init() {
 
 func main() {
 	r := gin.Default()
+	r.Use(cors.Default())
 
 	r.GET("/api/products", controllers.GetProducts)
 	r.GET("/api/products/:id", controllers.GetProduct)

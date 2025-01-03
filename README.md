@@ -12,6 +12,8 @@
             - `go get github.com/joho/godotenv`
         - GORM PostgreSQL Driver
             - `go get gorm.io/driver/postgres`
+        - GIN Cors: middleware to enable CORS support
+            - `go get github.com/gin-contrib/cors`
     - run the server `go run main.go`
 - Setup PostgreSQL
     - Download [PostgreSQL](https://www.postgresql.org/download/)
@@ -73,6 +75,19 @@
             <td>PostgreSQL URL</td>
         </tr>                 
     </table>
+- Setup Client environment variables (./client/.env)
+  - <table>
+        <tr>
+            <th>Variable</th>
+            <th>Value</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>VITE_SERVER_URL</td>
+            <td>localhost:3000</td>
+            <td>Server URL</td>
+        </tr>                 
+    </table>    
 
 # Functionalities
 - Fetch and display products
@@ -100,10 +115,16 @@
     - Update a product [x]
     - Checkout a product
     - Delete a product [x]
-- Create Admin Page
-- Form to create a new product
-- Setup Filebase Storage to store images
+- setup React app [x]
+- setup Tailwindcss [x]
+- Create Admin Page [x]
+- Create AddProduct component [x]
+- Form to create a new product [x]
+- setup Client env variables [x]
+- take input in form [x]
 - connect api to create a new product
+- enable server CORS
+- Setup Filebase Storage to store images
 - fetch all product and display
 - update product modal
 - connect api to update product
