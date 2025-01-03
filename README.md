@@ -97,7 +97,7 @@
     - Create a new product [x]
     - Get all products [x]
     - Get product details
-    - Update a product
+    - Update a product [x]
     - Checkout a product
     - Delete a product
 - Create Admin Page

@@ -123,3 +123,11 @@ func UpdateProduct(c *gin.Context) {
 		"product": existingProduct,
 	})
 }
+
+func DeleteProduct(c *gin.Context) {
+	id := c.Param("id")
+
+	initializers.DB.Delete(&models.Product{}, id)
+
+	c.Status(200)
+}
