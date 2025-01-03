@@ -18,6 +18,7 @@ func main() {
 
 	r.GET("/api/products", controllers.GetProducts)
 	r.POST("/api/products", controllers.CreateProduct)
+	r.PATCH("/api/products/:id", controllers.UpdateProduct)
 
 	port := "3000"
 	fmt.Printf("Starting server at port %v\n", port)

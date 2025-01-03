@@ -99,3 +99,27 @@ func CreateProduct(c *gin.Context) {
 		"product": newProduct,
 	})
 }
+
+func UpdateProduct(c *gin.Context) {
+	id := c.Param("id")
+
+	var body models.ProductClient
+	c.Bind(&body)
+
+	// find existing Product
+	var existingProduct models.Product
+	initializers.DB.First(&existingProduct, id)
+
+	// Update existing Product
+	initializers.DB.Model(&existingProduct).Updates(models.Product{
+		Name:     body.Name,
+		Price:    body.Price,
+		Category: body.Category,
+		Color:    body.Color,
+		Size:     body.Size,
+	})
+
+	c.JSON(200, gin.H{
+		"product": existingProduct,
+	})
+}
