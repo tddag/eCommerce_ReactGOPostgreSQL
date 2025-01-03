@@ -84,7 +84,7 @@
         </tr>
         <tr>
             <td>VITE_SERVER_URL</td>
-            <td>localhost:3000</td>
+            <td>http://localhost:3000</td>
             <td>Server URL</td>
         </tr>                 
     </table>    
