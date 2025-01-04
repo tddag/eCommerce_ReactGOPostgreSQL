@@ -1,4 +1,5 @@
 import AddProduct from "../components/AddProduct"
+import ProductListAdmin from "../components/ProductListAdmin"
 
 
 const Admin = () => {
@@ -6,6 +7,7 @@ const Admin = () => {
         <div className="flex flex-col">
             Admin
             <AddProduct/>
+            <ProductListAdmin/>
         </div>
         
     )

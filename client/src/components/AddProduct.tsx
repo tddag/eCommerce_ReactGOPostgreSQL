@@ -8,11 +8,11 @@ import { v4 as uuidv4} from 'uuid';
 const AddProduct = () => {
 
     const [formData, setFormData] = useState<Product>({
-        Name: "New Product",
-        Price: 100,
-        Category: "Shirt",
-        Color: "Black",
-        Size: "M",
+        Name: "Brixton Oath Olive Surplus Trucker Hat",
+        Price: 34.95,
+        Category: "Hats",
+        Color: "Dark Green",
+        Size: "One Size",
         Images: []
     })
 
@@ -22,7 +22,7 @@ const AddProduct = () => {
 
         setFormData(d => ({
             ...d,
-            [name]: files ? files : value
+            [name]: files ? files : (name == "Price" ? parseFloat(value) : value)
         }))
     }
 
@@ -31,6 +31,8 @@ const AddProduct = () => {
 
         try {
 
+            console.log("Form Data is: ", formData)
+            
 
             let imageUrls: string[] = [];
 
@@ -86,7 +88,7 @@ const AddProduct = () => {
 
                 <div className="flex items-center p-4">
                     <label htmlFor="Price" className={labelStyles}>Price</label>
-                    <input type="number" id="Price" name="Price" className={textInputStyles} onChange={handleFormDataChange}/>
+                    <input type="number" id="Price" name="Price" className={textInputStyles} onChange={handleFormDataChange} min="0" step="0.01"/>
                 </div>
 
                 <div className="flex items-center p-4">

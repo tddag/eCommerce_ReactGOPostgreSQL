@@ -1,95 +1,99 @@
 # Setup
+
 - Set up GO
-    - Download and Install [GO](https://go.dev/doc/install)
-    - navigate to server `cd server`
-    - initialize project `go mod init eCommerce-app`
-    - install dependencies:
-        - GIN: web framework
-            - `go get -u github.com/gin-gonic/gin`
-        - GORM: ORM library
-            - `go get -u gorm.io/gorm`
-        - GoDotEnv: loads env variables from .env file
-            - `go get github.com/joho/godotenv`
-        - GORM PostgreSQL Driver
-            - `go get gorm.io/driver/postgres`
-        - GIN Cors: middleware to enable CORS support
-            - `go get github.com/gin-contrib/cors`
-    - run the server `go run main.go`
+  - Download and Install [GO](https://go.dev/doc/install)
+  - navigate to server `cd server`
+  - initialize project `go mod init eCommerce-app`
+  - install dependencies:
+    - GIN: web framework
+      - `go get -u github.com/gin-gonic/gin`
+    - GORM: ORM library
+      - `go get -u gorm.io/gorm`
+    - GoDotEnv: loads env variables from .env file
+      - `go get github.com/joho/godotenv`
+    - GORM PostgreSQL Driver
+      - `go get gorm.io/driver/postgres`
+    - GIN Cors: middleware to enable CORS support
+      - `go get github.com/gin-contrib/cors`
+  - run the server `go run main.go`
 - Setup PostgreSQL
-    - Download [PostgreSQL](https://www.postgresql.org/download/)
-    - Open pgAdmin4 application
-    - Create a new database
-        - Right click Databases, select Create, select Database
-        - Enter Name `e_commerce_react_golang_postgresql_db`
-        - Click Save
-    - Open Query Tool
-        - Right click newly created DB
-        - Select Query Tool
-    - Create Product table
+  - Download [PostgreSQL](https://www.postgresql.org/download/)
+  - Open pgAdmin4 application
+  - Create a new database
+    - Right click Databases, select Create, select Database
+    - Enter Name `e_commerce_react_golang_postgresql_db`
+    - Click Save
+  - Open Query Tool
+    - Right click newly created DB
+    - Select Query Tool
+  - Create Product table
+  ```
+      CREATE TABLE Products (
+          Id SERIAL PRIMARY KEY,
+          Name VARCHAR(100) NOT NULL,
+          Price NUMERIC(6, 2) NOT NULL,
+          Category VARCHAR(100) NOT NULL,
+          Color VARCHAR(100),
+          Size VARCHAR(100),
+          created_at TIMESTAMP NOT NULL,
+          updated_at TIMESTAMP,
+          deleted_at TIMESTAMP
+      );
+  ```
+  - Create Image table
+  ```
+      CREATE TABLE Images (
+          Id SERIAL PRIMARY KEY,
+          Product_id INTEGER REFERENCES Products(Id),
+          Image_url VARCHAR(500),
+          created_at TIMESTAMP NOT NULL,
+          updated_at TIMESTAMP,
+          deleted_at TIMESTAMP
+      );
+  ```
+  - Insert a Product
+    - url: POST `http://localhost:3000/api/products`
     ```
-        CREATE TABLE Products (
-            Id SERIAL PRIMARY KEY,
-            Name VARCHAR(100) NOT NULL,
-            Price NUMERIC(6, 2) NOT NULL,
-            Category VARCHAR(100) NOT NULL,
-            Color VARCHAR(100),
-            Size VARCHAR(100),
-            created_at TIMESTAMP NOT NULL,
-            updated_at TIMESTAMP,
-            deleted_at TIMESTAMP
-        );
+        {
+            "Name":     "Brixton Oath Olive Surplus Trucker Hat",
+            "Price":    34.95,
+            "Category": "Hats",
+            "Color":    "Dark Green",
+            "Size":     "One Size",
+            "Images":  ["google.com", "youtube.com"]
+        }
     ```
-    - Create Image table
-    ```
-        CREATE TABLE Images (
-            Id SERIAL PRIMARY KEY,
-            Product_id INTEGER REFERENCES Products(Id),
-            Image_url VARCHAR(500),
-            created_at TIMESTAMP NOT NULL,
-            updated_at TIMESTAMP,
-            deleted_at TIMESTAMP            
-        );
-    ```
-    - Insert a Product
-        - url: POST `http://localhost:3000/api/products`
-        ```
-            {
-                "Name":     "Brixton Oath Olive Surplus Trucker Hat",
-                "Price":    34.95,
-                "Category": "Hats",
-                "Color":    "Dark Green",
-                "Size":     "One Size",
-                "Images":  ["google.com", "youtube.com"]
-            }
-        ```
 - Setup Firebase Storage
-    - Login to [Google Console](https://console.firebase.google.com/)
-    - Click Create a Project, enter name `eCommerce-ReactGOPostgreSQL`
-    - Click Continue, Click Create Project
-    - Click Project Settings, scroll down, SDK setup and configuration will be found here
-    - Install Firebase Client:
-        - `npm install firebase`
-    - Initialize Firebase
+
+  - Login to [Google Console](https://console.firebase.google.com/)
+  - Click Create a Project, enter name `eCommerce-ReactGOPostgreSQL`
+  - Click Continue, Click Create Project
+  - Click Project Settings, scroll down, SDK setup and configuration will be found here
+  - Install Firebase Client:
+    - `npm install firebase`
+  - Initialize Firebase
+
+  ```
+      import { initializeApp } from "firebase/app";
+      const firebaseConfig = {
+          apiKey: "....",
+          authDomain: "....firebaseapp.com",
+          projectId: "...",
+          storageBucket: ".....appspot.com",
+          messagingSenderId: "....",
+          appId: "1:...:web:...."
+      };
+      const app = initializeApp(firebaseConfig);
+  ```
+
+  - Might need to update Storage Rules to make it public for this project
+    - Click Storage
+    - Click Rules
     ```
-        import { initializeApp } from "firebase/app";
-        const firebaseConfig = {
-            apiKey: "....",
-            authDomain: "....firebaseapp.com",
-            projectId: "...",
-            storageBucket: ".....appspot.com",
-            messagingSenderId: "....",
-            appId: "1:...:web:...."
-        };
-        const app = initializeApp(firebaseConfig);
+        match /{allPaths=**} {
+            allow read, write: if request.time < timestamp.date(2025, 7, 22);
+        }
     ```
-    - Might need to update Storage Rules to make it public for this project
-        - Click Storage
-        - Click Rules
-        ```
-            match /{allPaths=**} {
-                allow read, write: if request.time < timestamp.date(2025, 7, 22);
-            }
-        ```
 
 - Setup Server environment variables (./server/.env)
   - <table>
@@ -146,9 +150,10 @@
             <td>1:22870408.......:web:ac07b13c......</td>
             <td>Firebase App ID</td>
         </tr>                        
-    </table>    
+    </table>
 
 # Functionalities
+
 - Fetch and display products
 - Fetch and display product details
 - Add a new product
@@ -158,9 +163,8 @@
 - Search and filter product
 - File Storage
 
-
-
 # Todo
+
 - setup Go server [x]
 - create productsController [x]
 - create Product model [x]
@@ -168,12 +172,12 @@
 - setup .env file [x]
 - connect PostgreSQL DB [x]
 - Products api
-    - Create a new product [x]
-    - Get all products [x]
-    - Get product details [x]
-    - Update a product [x]
-    - Checkout a product
-    - Delete a product [x]
+  - Create a new product [x]
+  - Get all products [x]
+  - Get product details [x]
+  - Update a product [x]
+  - Checkout a product
+  - Delete a product [x]
 - setup React app [x]
 - setup Tailwindcss [x]
 - Create Admin Page [x]
@@ -184,7 +188,7 @@
 - connect api to create a new product [x]
 - enable server CORS [x]
 - Setup Filebase Storage to store images [x]
-- fetch all product and display
+- fetch all product and display [x]
 - update product modal
 - connect api to update product
 - setup React Router
@@ -193,7 +197,7 @@
 - Create Product details page
 - fetch and display product details
 - create checkout page
-- create cart redux state 
+- create cart redux state
 - cart functionalities, add to cart, remove from cart
 - stripe payment integration
 - search functionality
