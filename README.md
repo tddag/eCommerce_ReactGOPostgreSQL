@@ -197,12 +197,13 @@
 - Create ProductItemUser component [x]
 - Implement Redux to store productList [x]
 - fetch and display all product [x]
-- Create NavBar component
+- Create NavBar component [x]
+- create cart redux state [x]
+- click Add will update cart item [x]
 - Create Filter Component
 - Create Product details page
 - fetch and display product details
 - create checkout page
-- create cart redux state
 - cart functionalities, add to cart, remove from cart
 - stripe payment integration
 - search functionality

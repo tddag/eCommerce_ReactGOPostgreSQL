@@ -5,5 +5,6 @@ export type Product = {
 	Category:  string,
 	Color:    string,
 	Size:     string
-	Images?:   string[]
+	Images?:   string[],
+	Qty?: number
 }

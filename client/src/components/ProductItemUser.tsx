@@ -1,6 +1,8 @@
 import { InputNumber } from "antd"
 import { Product } from "../types/Product"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { addToCart } from "../state/cart/cartSlice"
 
 interface ProductItemUserProps {
     product: Product
@@ -11,6 +13,15 @@ const ProductItemUser = ({
 }: ProductItemUserProps) => {
 
     const [qty, setQty] = useState(1);
+
+    const dispatch = useDispatch();
+
+    const handleAddAction = () => {
+        let cartProduct = {...product}
+        cartProduct.Qty = qty;
+        dispatch(addToCart(cartProduct))
+    }
+
     return (
         <div className="w-60 h-60 rounded-lg p-4 flex flex-col relative border-box border-b-2">
             <div className="cursor-pointer h-5">
@@ -35,7 +46,7 @@ const ProductItemUser = ({
                 <div>
                     {product.Price}
                 </div>
-                <div className="bg-purple-200 p-2 rounded-lg">
+                <div className="bg-purple-200 p-2 rounded-lg" onClick={handleAddAction}>
                     <button>Add</button>
                 </div>
             </div>
