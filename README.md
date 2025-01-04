@@ -189,8 +189,8 @@
 - enable server CORS [x]
 - Setup Filebase Storage to store images [x]
 - fetch all product and display [x]
-- update product modal
-- connect api to update product
+- update product modal [X]
+- connect api to update product [X]
 - setup React Router
 - Create Home page
 - fetch and display all product

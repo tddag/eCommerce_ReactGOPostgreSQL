@@ -5,7 +5,13 @@ import { storage } from "../storage/firebase"
 import { v4 as uuidv4} from 'uuid';
 
 
-const AddProduct = () => {
+interface AddProductProps {
+    getProductList: () => void
+}
+
+const AddProduct = ({
+    getProductList
+}: AddProductProps) => {
 
     const [formData, setFormData] = useState<Product>({
         Name: "Brixton Oath Olive Surplus Trucker Hat",
@@ -69,6 +75,7 @@ const AddProduct = () => {
             if (res.ok) {
                 const newProduct = await res.json();
                 console.log("Creata a new product successfully", newProduct)
+                getProductList()
             }
         } catch (e) {
             console.log("Failed to create a new product", e)
@@ -78,6 +85,7 @@ const AddProduct = () => {
 
     const labelStyles = "text-grey-700 font-bold mr-10"
     const textInputStyles = "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+    
     return (
         <div className="w-11/12 md:w-1/2 mx-auto mt-10">
             <form onSubmit={createProduct} className="p-4 shadow-md rounded-md bg-blue-200 flex flex-col">
