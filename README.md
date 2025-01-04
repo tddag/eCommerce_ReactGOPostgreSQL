@@ -200,10 +200,10 @@
 - Create NavBar component [x]
 - create cart redux state [x]
 - click Add will update cart item [x]
+- create Cart page [x]
 - Create Filter Component
 - Create Product details page
 - fetch and display product details
-- create checkout page
 - cart functionalities, add to cart, remove from cart
 - stripe payment integration
 - search functionality
