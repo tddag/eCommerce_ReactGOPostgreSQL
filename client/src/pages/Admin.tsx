@@ -30,7 +30,6 @@ const Admin = () => {
 
     return (
         <div className="flex flex-col">
-            Admin
             <AddProduct getProductList={getProductList}/>
             <ProductListAdmin productList={productList} getProductList={getProductList}/>
         </div>

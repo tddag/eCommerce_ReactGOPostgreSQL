@@ -191,8 +191,13 @@
 - fetch all product and display [x]
 - update product modal [X]
 - connect api to update product [X]
-- setup React Router
-- Create Home page
+- setup React Router [x]
+- Create Home page [x]
+- Create NavBar component
+- Create ProductListUser component [x]
+- Create ProductItemUser component [x]
+- Implement Redux to store productList
+- Create Filter Component
 - fetch and display all product
 - Create Product details page
 - fetch and display product details
