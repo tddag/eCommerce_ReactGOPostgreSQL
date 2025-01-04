@@ -196,9 +196,9 @@
 - Create NavBar component
 - Create ProductListUser component [x]
 - Create ProductItemUser component [x]
-- Implement Redux to store productList
+- Implement Redux to store productList [x]
+- fetch and display all product [x]
 - Create Filter Component
-- fetch and display all product
 - Create Product details page
 - fetch and display product details
 - create checkout page

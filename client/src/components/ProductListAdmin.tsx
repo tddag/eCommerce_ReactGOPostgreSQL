@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Product } from "../types/Product";
 import { Modal } from "antd";
 
