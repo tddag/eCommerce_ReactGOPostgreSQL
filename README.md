@@ -51,7 +51,7 @@
         );
     ```
     - Insert a Product
-        - url: POST `localhost:3000/api/products`
+        - url: POST `http://localhost:3000/api/products`
         ```
             {
                 "Name":     "Brixton Oath Olive Surplus Trucker Hat",
@@ -62,6 +62,35 @@
                 "Images":  ["google.com", "youtube.com"]
             }
         ```
+- Setup Firebase Storage
+    - Login to [Google Console](https://console.firebase.google.com/)
+    - Click Create a Project, enter name `eCommerce-ReactGOPostgreSQL`
+    - Click Continue, Click Create Project
+    - Click Project Settings, scroll down, SDK setup and configuration will be found here
+    - Install Firebase Client:
+        - `npm install firebase`
+    - Initialize Firebase
+    ```
+        import { initializeApp } from "firebase/app";
+        const firebaseConfig = {
+            apiKey: "....",
+            authDomain: "....firebaseapp.com",
+            projectId: "...",
+            storageBucket: ".....appspot.com",
+            messagingSenderId: "....",
+            appId: "1:...:web:...."
+        };
+        const app = initializeApp(firebaseConfig);
+    ```
+    - Might need to update Storage Rules to make it public for this project
+        - Click Storage
+        - Click Rules
+        ```
+            match /{allPaths=**} {
+                allow read, write: if request.time < timestamp.date(2025, 7, 22);
+            }
+        ```
+
 - Setup Server environment variables (./server/.env)
   - <table>
         <tr>
@@ -86,7 +115,37 @@
             <td>VITE_SERVER_URL</td>
             <td>http://localhost:3000</td>
             <td>Server URL</td>
-        </tr>                 
+        </tr>     
+        <tr>
+            <td>VITE_FIREBASE_APIKEY</td>
+            <td>......</td>
+            <td>Firebase API Key</td>
+        </tr>
+        <tr>
+            <td>VITE_FIREBASE_AUTH_DOMAIN</td>
+            <td>mern-ecommerce-6169d.firebaseapp.com</td>
+            <td>Firebase Auth Domain</td>
+        </tr>        
+        <tr>
+            <td>VITE_FIREBASE_PROJECT_ID</td>
+            <td>mern-ecommerce-6169d</td>
+            <td>Firebase Project IDtd>
+        </tr>   
+        <tr>
+            <td>VITE_FIREBASE_STORAGE_BUCKET</td>
+            <td>mern-ecommerce-6169d.appspot.com</td>
+            <td>Firebase Storage Bucket</td>
+        </tr>       
+        <tr>
+            <td>VITE_FIREBASE_STORAGE_MESSAGING_SENDER_ID</td>
+            <td>22870......</td>
+            <td>Firebase Storage Messing Sender ID</td>
+        </tr>
+        <tr>
+            <td>VITE_FIREBASE_APP_ID</td>
+            <td>1:22870408.......:web:ac07b13c......</td>
+            <td>Firebase App ID</td>
+        </tr>                        
     </table>    
 
 # Functionalities
@@ -122,9 +181,9 @@
 - Form to create a new product [x]
 - setup Client env variables [x]
 - take input in form [x]
-- connect api to create a new product
-- enable server CORS
-- Setup Filebase Storage to store images
+- connect api to create a new product [x]
+- enable server CORS [x]
+- Setup Filebase Storage to store images [x]
 - fetch all product and display
 - update product modal
 - connect api to update product

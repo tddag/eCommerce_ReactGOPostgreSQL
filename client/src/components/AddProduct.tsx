@@ -1,5 +1,8 @@
 import { useState } from "react"
 import { Product } from "../types/Product"
+import { ref, uploadBytes } from "firebase/storage"
+import { storage } from "../storage/firebase"
+import { v4 as uuidv4} from 'uuid';
 
 
 const AddProduct = () => {
@@ -27,18 +30,43 @@ const AddProduct = () => {
         e.preventDefault();
 
         try {
+
+
+            let imageUrls: string[] = [];
+
+            if (formData.Images) {
+                for (let image of formData.Images) {
+                    let fileRef = ref(storage, uuidv4())
+                    console.log(typeof image)
+                    console.log(image)
+                    // @ts-ignore
+                    await uploadBytes(fileRef, image).then((snapshot) => {
+                        console.log("Upload file successfully")
+                        // @ts-ignore
+                        let url = `https://firebasestorage.googleapis.com/v0/b/${snapshot.ref._location.bucket}/o/${snapshot.ref._location.path}?alt=media`
+                        imageUrls.push(url);
+                    })
+                }
+            }
+            console.log("After sending files")
+            console.log(imageUrls)     
+            formData.Images = imageUrls;       
+
+
             let url = `${import.meta.env.VITE_SERVER_URL}/api/products`
             let res = await fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    ...formData
+                })
             })
 
             if (res.ok) {
                 const newProduct = await res.json();
-                console.log("Creata a new product successfully")
+                console.log("Creata a new product successfully", newProduct)
             }
         } catch (e) {
             console.log("Failed to create a new product", e)
