@@ -21,4 +21,5 @@ type ProductClient struct {
 	Color    string
 	Size     string
 	Images   []string
+	Qty      int64
 }

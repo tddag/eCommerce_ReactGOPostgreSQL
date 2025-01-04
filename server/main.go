@@ -23,6 +23,7 @@ func main() {
 	r.POST("/api/products", controllers.CreateProduct)
 	r.PATCH("/api/products/:id", controllers.UpdateProduct)
 	r.DELETE("/api/products/:id", controllers.DeleteProduct)
+	r.POST("/api/products/checkout", controllers.CheckoutProducts)
 
 	port := "3000"
 	fmt.Printf("Starting server at port %v\n", port)

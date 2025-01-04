@@ -20,6 +20,30 @@ const Cart = () => {
             sum += (prod.Qty ? prod.Qty * prod.Price : 0)
         }
         return sum
+    }  
+    
+    const handleMakePayment = async () => {
+        try {
+            let url = `${import.meta.env.VITE_SERVER_URL}/api/products/checkout`
+
+            let res = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(cart),
+            })
+
+            if (res.ok) {
+                res = await res.json();
+                window.location.href = res.url
+            } else {
+                throw new Error("Network response is not ok")
+            }
+        } catch (e) {
+            console.log(e);
+
+        }
     }    
 
     return (
@@ -75,7 +99,7 @@ const Cart = () => {
 
                 <div className="w-1/2 h-screen">
                     <div className="flex flex-col p-4">
-                        <button className="p-2 rounded-lg bg-orange-300 w-full md:w-1/2 mb-5">Make Payment</button>
+                        <button className="p-2 rounded-lg bg-orange-300 w-full md:w-1/2 mb-5" onClick={handleMakePayment}>Make Payment</button>
                         <div>Order Summary</div>
                         <div>Items: ${getTotal()}</div>
                         <div>Tax: ${(getTotal()*0.13).toFixed(2).toLocaleString()}</div>

@@ -15,6 +15,8 @@
       - `go get gorm.io/driver/postgres`
     - GIN Cors: middleware to enable CORS support
       - `go get github.com/gin-contrib/cors`
+    - Stripe: Stripe Payment API
+      - `go get github.com/stripe/stripe-go/v81`
   - run the server `go run main.go`
 - Setup PostgreSQL
   - Download [PostgreSQL](https://www.postgresql.org/download/)
@@ -94,6 +96,11 @@
             allow read, write: if request.time < timestamp.date(2025, 7, 22);
         }
     ```
+- Setup Stripe API:
+  + Login to [Stripe](https://dashboard.stripe.com/test/dashboard)
+  + Create an Account
+  + Click Developers, click API keys, copy Sercret Key
+  + Test Card: 4242 4242 4242 4242
 
 - Setup Server environment variables (./server/.env)
   - <table>
@@ -106,6 +113,11 @@
             <td>DB_URL</td>
             <td>"host=localhost user=postgres password=.... dbname=e_commerce_react_golang_postgresql_db port=5432 sslmode=disable"</td>
             <td>PostgreSQL URL</td>
+        </tr>          
+        <tr>
+            <td>STRIPE_SECRET_KEY</td>
+            <td>sk_test_51PX.....</td>
+            <td>Stripe Secret Key</td>
         </tr>                 
     </table>
 - Setup Client environment variables (./client/.env)
@@ -201,10 +213,10 @@
 - create cart redux state [x]
 - click Add will update cart item [x]
 - create Cart page [x]
+- cart functionalities, add to cart, remove from cart [x]
+- stripe payment integration [x]
+- search functionality
+- filter functionality
 - Create Filter Component
 - Create Product details page
 - fetch and display product details
-- cart functionalities, add to cart, remove from cart
-- stripe payment integration
-- search functionality
-- filter functionality

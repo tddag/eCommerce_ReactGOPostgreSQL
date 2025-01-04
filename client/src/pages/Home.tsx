@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import NavBar from "../components/NavBar"
 import ProductListUser from "../components/ProductListUser"
-import { Product } from "../types/Product"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../state/store"
 import { getProductListAsync } from "../state/products/productsSlice"
