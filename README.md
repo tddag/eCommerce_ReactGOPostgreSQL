@@ -215,8 +215,8 @@
 - create Cart page [x]
 - cart functionalities, add to cart, remove from cart [x]
 - stripe payment integration [x]
-- search functionality
-- filter functionality
-- Create Filter Component
+- Create Filter Component [x]
+- search functionality [x]
+- filter functionality [x]
 - Create Product details page
 - fetch and display product details
